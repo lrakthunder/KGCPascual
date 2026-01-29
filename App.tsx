@@ -61,46 +61,49 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 ${theme === 'dark' ? 'bg-[#050b14] text-cyan-100' : 'bg-gray-100 text-gray-900'} p-4 md:p-8 flex items-center justify-center md:overflow-hidden`}>
+    <div className={`min-h-screen h-screen transition-colors duration-700 ${theme === 'dark' ? 'bg-[#050b14] text-cyan-100' : 'bg-gray-100 text-gray-900'} p-4 md:p-8 flex items-center justify-center`}>
       {/* Background Ambience */}
       <div className="fixed inset-0 hologram-grid opacity-20 pointer-events-none"></div>
       <div className="scanline"></div>
 
-        <div className="w-full h-auto md:h-[90vh] relative z-20 pr-4 md:pr-12 lg:pr-24">
+      <div className="w-full h-full md:h-[90vh] relative z-20 pr-4 md:pr-12 lg:pr-24">
         <HUDFrame theme={theme}>
-          {/* Header Area */}
-          <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-6 pt-4 border-b border-cyan-500/10">
-            <div className="flex flex-col items-start mb-4 md:mb-0">
-              <h1 className={`text-2xl md:text-3xl font-orbitron font-black tracking-tighter ${theme === 'dark' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'text-blue-700'}`}>
-                KARL PASCUAL <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
-              </h1>
-              <span className="text-[10px] font-mono opacity-50">LOCATION: 7.097370° N, 124.867085° W</span>
-            </div>
-
-            <Navigation activeSection={activeSection} setActiveSection={setActiveSection} theme={theme} />
-
-            <div className="flex items-center gap-4 py-4 md:py-0">
+          {/* Header Area (always show branding; nav buttons only on desktop) */}
+          <div className="flex flex-col lg:flex-row items-center justify-between px-4 md:px-6 pt-4 border-b border-cyan-500/10 gap-4">
+            {/* Branding + theme toggle in one row */}
+            <div className="flex w-full items-center justify-between gap-2">
+              <div className="flex flex-col items-start">
+                <h1 className={`text-xl sm:text-2xl md:text-3xl font-orbitron font-black tracking-tighter ${theme === 'dark' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'text-blue-700'}`}>
+                  KARL PASCUAL <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
+                </h1>
+                <span className="hidden lg:inline text-[9px] sm:text-[10px] font-mono opacity-50">LOCATION: 7.097370° N, 124.867085° W</span>
+              </div>
               <button 
                 onClick={toggleTheme}
-                className={`p-2 rounded-full border border-cyan-500/30 hover:bg-cyan-500/10 transition-colors ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}
+                className={`ml-2 sm:ml-4 p-1.5 sm:p-2 rounded-full border border-cyan-500/30 hover:bg-cyan-500/10 transition-colors ${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}
               >
                 {theme === 'dark' ? (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M7.757 6.364l.707.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M7.757 6.364l.707.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 ) : (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
                 )}
               </button>
+            </div>
+
+            {/* Nav buttons (desktop only) */}
+            <div className="hidden lg:block">
+              <Navigation activeSection={activeSection} setActiveSection={setActiveSection} theme={theme} />
             </div>
           </div>
 
           {/* Main Content Scroll Area */}
-          <div id="scroll-container" className="flex-1 overflow-y-auto px-6 md:px-12 py-8 custom-scrollbar scroll-smooth">
+          <div id="scroll-container" className="flex-1 overflow-y-auto px-4 md:px-12 py-4 md:py-8 custom-scrollbar scroll-smooth">
             {/* Overview Section */}
             <section id="overview" className="min-h-screen pb-16">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-[fadeIn_0.5s_ease-out]">
-                <div className="lg:col-span-2 space-y-8">
-                  <div className={`p-8 border-l-4 ${theme === 'dark' ? 'border-cyan-500 bg-cyan-950/20' : 'border-blue-600 bg-blue-50'} relative overflow-hidden`}>
-                    <h2 className="text-4xl md:text-6xl font-orbitron font-black mb-4 leading-tight">
+                <div className="lg:col-span-2 space-y-6 md:space-y-8">
+                  <div className={`p-4 md:p-8 border-l-4 ${theme === 'dark' ? 'border-cyan-500 bg-cyan-950/20' : 'border-blue-600 bg-blue-50'} relative overflow-hidden`}>
+                    <h2 className="text-3xl md:text-6xl font-orbitron font-black mb-4 leading-tight">
                       BUILDING THE <br/>
                       <span className={`${theme === 'dark' ? 'text-cyan-400' : 'text-blue-700'}`}>DIGITAL FRONTIER</span>
                     </h2>
@@ -142,7 +145,7 @@ const App: React.FC = () => {
                   </div>
                 </div>
                 
-                 <div className="lg:col-span-1 h-64 md:h-96 lg:h-auto">
+                 <div className="hidden md:block lg:col-span-1 h-64 md:h-96 lg:h-auto">
                    <JarvisChat isDark={theme === 'dark'} />
                  </div>
               </div>
@@ -332,8 +335,8 @@ const App: React.FC = () => {
             </section>
           </div>
 
-          {/* Footer Bar */}
-          <div className="flex justify-between items-center px-6 py-2 border-t border-cyan-500/10 text-[10px] font-mono tracking-widest opacity-40">
+          {/* Footer Bar (hidden on phones) */}
+          <div className="hidden md:flex justify-between items-center px-6 py-2 border-t border-cyan-500/10 text-[10px] font-mono tracking-widest opacity-40">
             <span>© 2026 KARL GILBERT PASCUAL</span>
             <div className="flex gap-4">
               <span className="animate-pulse">THUNDER_NET CONNECTED</span>

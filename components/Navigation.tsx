@@ -34,9 +34,9 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
   };
 
   return (
-    <nav className="flex justify-between items-center py-3 md:py-6 px-2 md:px-4 border-b border-cyan-500/20 backdrop-blur-md">
-      {/* Desktop / tablet nav (hidden on small screens) */}
-      <div className="hidden md:flex justify-center items-center gap-2 md:gap-8 w-full">
+    <nav className="flex justify-between items-center py-3 lg:py-6 px-2 lg:px-4 border-b border-cyan-500/20 backdrop-blur-md">
+      {/* Desktop nav (show on large screens only) */}
+      <div className="hidden lg:flex justify-center items-center gap-2 lg:gap-8 w-full">
         {navItems.map((item) => (
           <button
             key={item.id}
@@ -54,8 +54,8 @@ export const Navigation: React.FC<NavigationProps> = ({ activeSection, setActive
         ))}
       </div>
 
-      {/* Mobile burger */}
-      <div className="md:hidden flex items-center">
+      {/* Mobile / tablet burger (show below large screens) */}
+      <div className="lg:hidden flex items-center">
         <button
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen(prev => !prev)}
