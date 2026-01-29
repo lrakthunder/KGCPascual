@@ -61,15 +61,15 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 ${theme === 'dark' ? 'bg-[#050b14] text-cyan-100' : 'bg-gray-100 text-gray-900'} p-4 md:p-8 flex items-center justify-center overflow-hidden`}>
+    <div className={`min-h-screen transition-colors duration-700 ${theme === 'dark' ? 'bg-[#050b14] text-cyan-100' : 'bg-gray-100 text-gray-900'} p-4 md:p-8 flex items-center justify-center md:overflow-hidden`}>
       {/* Background Ambience */}
       <div className="fixed inset-0 hologram-grid opacity-20 pointer-events-none"></div>
       <div className="scanline"></div>
 
-      <div className="w-full h-[90vh] relative z-20 pr-24">
+        <div className="w-full h-auto md:h-[90vh] relative z-20 pr-4 md:pr-12 lg:pr-24">
         <HUDFrame theme={theme}>
           {/* Header Area */}
-          <div className="flex flex-col md:flex-row items-center justify-between px-6 pt-4 border-b border-cyan-500/10">
+          <div className="flex flex-col md:flex-row items-center justify-between px-4 md:px-6 pt-4 border-b border-cyan-500/10">
             <div className="flex flex-col items-start mb-4 md:mb-0">
               <h1 className={`text-2xl md:text-3xl font-orbitron font-black tracking-tighter ${theme === 'dark' ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]' : 'text-blue-700'}`}>
                 KARL PASCUAL <span className="text-xs font-light text-cyan-600/50">v4.0.2</span>
@@ -142,9 +142,9 @@ const App: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="lg:col-span-1 h-[500px] lg:h-auto">
+                 <div className="lg:col-span-1 h-64 md:h-96 lg:h-auto">
                    <JarvisChat isDark={theme === 'dark'} />
-                </div>
+                 </div>
               </div>
             </section>
 
@@ -345,7 +345,7 @@ const App: React.FC = () => {
       {/* Floating Comms Button */}
       <button 
         onClick={() => setIsContactOpen(true)}
-        className="fixed bottom-8 right-8 z-[60] w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:scale-110 transition-transform group"
+        className="fixed bottom-6 right-4 z-[60] w-12 h-12 md:w-16 md:h-16 rounded-full bg-cyan-500 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:scale-110 transition-transform group"
       >
         <svg className="w-8 h-8 text-white group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
         <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white animate-bounce"></div>
