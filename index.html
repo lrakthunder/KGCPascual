@@ -54,21 +54,25 @@
             background-size: 40px 40px;
         }
     </style>
-
-<link rel="stylesheet" href="/index.css">
-<script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4"
-  }
-}
-</script>
-  <script type="module" crossorigin src="/KGCPascual/assets/index-By5wjZJb.js"></script>
+<!-- removed importmap to avoid HTML parsing issues; Vite will resolve local deps -->
+  <script type="module" crossorigin src="/jarvix-portfolio/assets/index-ZD_fq7SA.js"></script>
+  <link rel="stylesheet" crossorigin href="/jarvix-portfolio/assets/index-Bh2DmTJ4.css">
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root"></div>
+<!-- Auto-reload once on first visit to guard against initial missing assets (falls back when CDN/fonts delay) -->
+<script>
+    (function(){
+        try {
+            if (!sessionStorage.getItem('jarvix_reloaded')) {
+                sessionStorage.setItem('jarvix_reloaded','1');
+                // Reload once to ensure CSS/JS loaded correctly on subpath first load
+                window.location.reload();
+            }
+        } catch (e) {
+            /* ignore */
+        }
+    })();
+</script>
 </body>
 </html>
